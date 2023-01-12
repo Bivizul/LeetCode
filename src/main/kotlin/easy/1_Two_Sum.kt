@@ -34,7 +34,8 @@ val target = 6
 var count = 0
 
 fun main() {
-    println("Answer : ${twoSum(nums, target).contentToString()}")
+    println("Answer1 : ${twoSum(nums, target).contentToString()}")
+    println("Answer2 : ${twoSum2(nums, target).contentToString()}")
 }
 
 fun twoSum(nums: IntArray, target: Int): IntArray {
@@ -51,5 +52,14 @@ fun twoSum(nums: IntArray, target: Int): IntArray {
         }
     }
     return newIntArray
+}
+
+fun twoSum2(nums: IntArray, target: Int): IntArray {
+    val diffMap = mutableMapOf<Int, Int>()
+    nums.forEachIndexed { index, int ->
+        diffMap[int]?.let { return intArrayOf(it, index) }
+        diffMap[target - int] = index
+    }
+    return intArrayOf()
 }
 
