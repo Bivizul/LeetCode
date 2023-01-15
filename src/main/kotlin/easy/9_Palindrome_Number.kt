@@ -27,7 +27,7 @@ Follow up: Could you solve it without converting the integer to a string?
  **/
 
 fun main() {
-    val x = -12121
+    val x = 12121
     println("X = $x")
     println("Is palindrome : ${isPalindrome(x)}")
     println("Is palindrome2 : ${isPalindrome2(x)}")
@@ -54,8 +54,6 @@ fun isPalindrome2(x: Int): Boolean {
     while (a != 0) {
         b = b * 10 + (a % 10)
         a /= 10
-        println(a)
-        println(b)
     }
     return b == x
 }
