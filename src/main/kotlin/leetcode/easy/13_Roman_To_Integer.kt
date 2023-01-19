@@ -1,4 +1,4 @@
-package easy
+package leetcode.easy
 
 /**Roman numerals are represented by seven different symbols: I, V, X, L, C, D and M.
 
@@ -25,6 +25,7 @@ Given a roman numeral, convert it to an integer.**/
 
 fun main() {
     val s = "MCMXCIV" // 1994
+    println(romanToInt(s))
     println(romanToInt2(s))
 
 }
@@ -39,26 +40,26 @@ private val charToInt = mapOf(
     'M' to 1000
 )
 
-//fun romanToInt(s: String): Int {
-//    var a = 0
-//    var b = 0
-//    for (i in s.length){
-//        if (4 * b < a) a -= b
-//        else a += b
-//        i--
-//    }
-//
-//    return a
-//}
+fun romanToInt(s: String): Int {
+    var number = 0
+    var lastValue = 1000
+    s.forEach { char ->
+        val value = charToInt[char] ?: 0
+        if (value > lastValue) number -= lastValue * 2
+        number += value
+        lastValue = value
+    }
+    return number
+}
 
 fun romanToInt2(s: String): Int {
     val strTrimmed = s.trim()
-    if(s.isEmpty() || s.any { it !in charToInt.keys }) return -1
+    if (s.isEmpty() || s.any { it !in charToInt.keys }) return -1
     var result = 0
     var oldValue = charToInt.getValue(strTrimmed.first())
-    for(i in strTrimmed){
+    for (i in strTrimmed) {
         val newValue = charToInt.getValue(i)
-        if(oldValue < newValue) result -= 2 * oldValue
+        if (oldValue < newValue) result -= 2 * oldValue
         result += newValue
         oldValue = newValue
     }
